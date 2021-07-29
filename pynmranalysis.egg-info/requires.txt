@@ -1,0 +1,4 @@
+numpy
+pandas
+scipy
+pyod==0.9.0
