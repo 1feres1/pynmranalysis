@@ -222,12 +222,13 @@ plsda = PyPLS_DA(ncomps=3)
 plsda.fit(spectrum , target)
 ```
 interia plot is a paired barbot that shows R2Y (goodness of the fit ) score and R2Y (goodnes of predection with cross validation)
+
 ``` python 
 plsda.inertia_barplot(spectrum, target)
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/interia%20plot.PNG" >
-PLSDA score plot is a scatter plot that shows the projection of simples in the first 2 latent
-variables
+PLSDA score plot is a scatter plot that shows the projection of simples in the first 2 latent variables
+
 ``` python 
 plsda.score_plot(target)
 ```
