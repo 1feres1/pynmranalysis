@@ -202,7 +202,7 @@ outiler plot is a plot that calculate index of outliers in the data and plot the
 ``` python 
 pca.outlier_plot()
 ```
-<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/outlier_plot.PNG" >
+
 
 target plot is a scatter plot that shows the projection of each simple in the first 2 componants with 
 colors that much their classses in the target variable
@@ -231,7 +231,7 @@ variables
 plsda.score_plot(target)
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/plsda_score_plot.PNG" >
-## License
+### License
 
 MIT
 
