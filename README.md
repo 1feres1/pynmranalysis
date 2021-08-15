@@ -197,12 +197,11 @@ scree plot is agraph that show each componant of the pca model with their explai
 pca.scree_plot()
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/scree_plot.PNG" >
-
 outiler plot is a plot that calculate index of outliers in the data and plot them with different color
 ``` python 
 pca.outlier_plot()
 ```
-
+<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/outlier_plot.PNG" >
 
 target plot is a scatter plot that shows the projection of each simple in the first 2 componants with 
 colors that much their classses in the target variable
