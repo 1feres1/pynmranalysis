@@ -188,6 +188,7 @@ target = data.iloc[ : , -1].values
 ```
 
 #### PyPCA 
+
 Principal component analysis, or PCA, is a statistical procedure that allows you to summarize the information content in large data tables by means of a smaller set of “summary indices” that can be more easily visualized and analyzed
 
 ``` python 
@@ -222,7 +223,9 @@ colors that much their classses in the target variable
 pca.target_plot(target)
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/target_plot.PNG" >
+
 #### PyPLS_DA
+
 Partial least squares-discriminant analysis (PLS-DA) is a versatile algorithm that can be used for predictive and descriptive modelling as well as for discriminative variable selection.
 
 ``` python 
