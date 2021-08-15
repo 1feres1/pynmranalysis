@@ -2,7 +2,7 @@
 # Pynmranalysis
 ## python library for NMR preprocessing and analysis
 
-![alt text](https://github.com/1feres1/pynmranalysis/blob/main/PyNMRanalysis-logos.jpeg?raw=true)
+![alt text](https://github.com/1feres1/pynmranalysis/blob/main/PyNMRanalysis-logos.jpeg?raw=true width="200" height="100" )
 
 [![Build Status](https://travis-ci.com/1feres1/pynmranalysis.svg?branch=main)](https://travis-ci.com/1feres1/pynmranalysis)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
