@@ -191,22 +191,23 @@ score plot is the projection of samples in the data set in lower dimention spce 
 ``` python 
 pca.score_plot()
 ```
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/score_plot.PNG" >
 scree plot is agraph that show each componant of the pca model with their explained variance
 ``` python 
 pca.scree_plot()
 ```
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/scree_plot.PNG" >
+
 outiler plot is a plot that calculate index of outlieres in the data and plot them with different color
 ``` python 
 pca.outlier_plot()
 ```
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/outlier_plot.PNG" >
 target plot is a scatter plot that shows the projection of each simple in the first 2 componants with colors that much their classses in the target variable
 ``` python 
 pca.target_plot( target)
 ```
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+<img src="hhttps://github.com/1feres1/pynmranalysis/blob/main/exemple/target_plot.PNG" >
 #### PyPLS_DA
 Partial least squares-discriminant analysis (PLS-DA) is a versatile algorithm that can be used for predictive and descriptive modelling as well as for discriminative variable selection.
 ``` python 
@@ -220,12 +221,12 @@ interia plot is a paired barbot that shows R2Y (goodness of the fit ) score and 
 ``` python 
 plsda.inertia_barplot(spectrum, target)
 ```
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/interia%20plot.PNG" >
 PLSDA score plot is a scatter plot that shows the projection of simples in the first 2 latennt variables
 ``` python 
 plsda.score_plot(target)
 ```
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/plsda_score_plot.PNG" >
 ## License
 
 MIT
