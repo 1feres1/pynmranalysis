@@ -188,16 +188,19 @@ pca = PyPCA(n_comps=3)
 pca.fit(spectrum)
 ```
 score plot is the projection of samples in the data set in lower dimention spce of the first 2 componants of the 
+
 ``` python 
 pca.score_plot()
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/score_plot.PNG" >
 scree plot is agraph that show each componant of the pca model with their explained variance
+
 ``` python 
 pca.scree_plot()
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/scree_plot.PNG" >
 outiler plot is a plot that calculate index of outliers in the data and plot them with different color
+
 ``` python 
 pca.outlier_plot()
 ```
