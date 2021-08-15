@@ -223,6 +223,7 @@ colors that much their classses in the target variable
 pca.target_plot(target)
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/target_plot.PNG" >
+
 #### PyPLS_DA
 
 Partial least squares-discriminant analysis (PLS-DA) is a versatile algorithm that can be used for predictive and descriptive modelling as well as for discriminative variable selection.
