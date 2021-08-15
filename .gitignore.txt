@@ -1,0 +1,10 @@
+# Ignore build folder
+build
+
+# Ignore dist folder
+dist
+
+# Ignore egg info folder
+pynmranalysis.egg-info
+# Ignore idea
+.idea
