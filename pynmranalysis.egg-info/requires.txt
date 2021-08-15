@@ -1,4 +1,5 @@
 numpy
 pandas
 scipy
-pyod==0.9.0
+scikit-learn
+matplotlib
