@@ -104,6 +104,7 @@ plt.show()
 ```
 ##### median normalization
 Each spectrum is divided by its median so that its median becomes 1.
+
 ```python
 from pynmranalysis.normalization import quantile_normalization
 norm_spectrum = quantile_normalization(r_spectrum , verbose=False)
@@ -119,6 +120,7 @@ plt.show()
 ```
 ##### quantile normalization
 Each spectrum is divided by its first quartile so that its first quartile becomes 1.
+
 ```python
 from pynmranalysis.normalization import mean_normalization
 norm_spectrum = mean_normalization(r_spectrum , verbose=False)
@@ -134,6 +136,7 @@ plt.show()
 ```
 ##### peak normalization
 Each spectrum is divided by the value of the peak of the spectrum contained between "peak_range" inclusive (i.e. the maximum value of spectral intensities in that interval).
+
 ```python
 from pynmranalysis.normalization import peak_normalization
 norm_spectrum = peak_normalization(r_spectrum , verbose=False)
@@ -149,6 +152,7 @@ plt.show()
 ```
 ##### PQN normalization
 Probabilistic Quotient Normalization from Dieterle et al. (2006). If ref.norm is "median" or "mean", will use the median or the mean spectrum as the reference spectrum ; if it is a single number, will use the spectrum located at that row in the spectral matrix; if ref.norm is a numeric vertor of length equal to the number of spectral variables, it defines manually the reference spectrum.
+
 ```python
 from pynmranalysis.normalization import PQN_normalization
 norm_spectrum = PQN_normalization(r_spectrum , verbose=False)
@@ -166,6 +170,7 @@ plt.show()
 ### statistical analysis
 #### PCA 
 A pickle file containing 1H-NMR spectra for 64 serum samples of patients with two groups of disgstive diseases bliary/Pancreatic Disease and Intestinal Diseases is located in digestive_disease_data.pkl in the exemple folder of this repository (see acknowledgment below)
+
 ```python
 # import 
 import matplotlib.pyplot as plt
@@ -180,6 +185,7 @@ target = data.iloc[ : , -1].values
 
 #### PyPCA 
 Principal component analysis, or PCA, is a statistical procedure that allows you to summarize the information content in large data tables by means of a smaller set of “summary indices” that can be more easily visualized and analyzed
+
 ``` python 
 from pynmranalysis.analysis import PyPCA
 #create pypca instance 
@@ -214,6 +220,7 @@ pca.target_plot(target)
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/target_plot.PNG" >
 #### PyPLS_DA
 Partial least squares-discriminant analysis (PLS-DA) is a versatile algorithm that can be used for predictive and descriptive modelling as well as for discriminative variable selection.
+
 ``` python 
 from pynmranalysis.analysis import PyPLS_DA
 #create pyplsda instance 
