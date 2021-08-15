@@ -34,7 +34,8 @@ the following python script shows you how to use the main functions of our libra
 demo link:
 https://colab.research.google.com/drive/1A5qS1ObiiYBXmPnlecCTxzV41BzQ3fG6?usp=sharing
 ### preprocessing
-A CSV file containing 1H-NMR spectra for 71 serum samples of patients with coronary heart disease (CHD) and healthy controls is located in CHD.csv in the exemple folder of this repository (see acknowledgment below)
+A CSV file containing 1H-NMR spectra for 71 serum samples of patients with coronary heart disease (CHD) and healthy controls is located in CHD.csv in the exemple folder of this repository
+
 ```python
 # import 
 import matplotlib.pyplot as plt
@@ -169,7 +170,7 @@ plt.show()
 
 ### statistical analysis
 #### PCA 
-A pickle file containing 1H-NMR spectra for 64 serum samples of patients with two groups of disgstive diseases bliary/Pancreatic Disease and Intestinal Diseases is located in digestive_disease_data.pkl in the exemple folder of this repository (see acknowledgment below)
+A pickle file containing 1H-NMR spectra for 64 serum samples of patients with two groups of disgstive diseases bliary/Pancreatic Disease and Intestinal Diseases is located in digestive_disease_data.pkl in the exemple folder of this repository 
 
 ```python
 # import 
@@ -240,6 +241,7 @@ PLSDA score plot is a scatter plot that shows the projection of simples in the f
 plsda.score_plot(target)
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/plsda_score_plot.PNG" >
+
 ### License
 
 MIT
