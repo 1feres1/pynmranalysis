@@ -1,6 +1,6 @@
 
 # Pynmranalysis
-## python library for NMR preprocessing and analysis
+## Python library for NMR preprocessing and analysis
 
 
 <p align="center">
@@ -14,9 +14,9 @@
 [![PyPI version fury.io](https://badge.fury.io/py/ansicolortags.svg)](https://pypi.org/project/pynmranalysis/)
 [![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/1feres1/pynmranalysis/releases/)
 
-pynmranalysis has the ability to work with 1H NMR spectrum and offers many preprocessing functions that makes analysing the spectrum more effective
-also it can be used to perform statistical modeling with great plots
-- preprocessing steps
+Pynmranalysis has the ability to work with 1H NMR spectrum and offers many preprocessing functions that makes analysing the spectrum more effective
+Also it can be used to perform statistical modeling with great plots
+- Preprocessing steps
 - Normalization 
 - Statistical analysis
 
@@ -35,7 +35,7 @@ You may also install directly from this repository for the current master:
 pip install git+git://github.com/1feres1/pynmranalysis.git
 ```
 ## How to use 
-the following python script shows you how to use the main functions of our library
+The following python script shows you how to use the main functions of our library
 demo link:
 https://colab.research.google.com/drive/1A5qS1ObiiYBXmPnlecCTxzV41BzQ3fG6?usp=sharing
 ### Preprocessing
