@@ -259,6 +259,7 @@ PLSDA score plot is a scatter plot that shows the projection of simples in the f
 plsda.score_plot(target)
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/plsda_score_plot.PNG" >
+
 note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[2]](#2).
 
 ### License
@@ -291,4 +292,4 @@ SOFTWARE.
 PepsNMR for 1 H NMR metabolomic data pre-processing Manon Martin , Benoît Legat
 
 <a id="2">[2]</a> 
-Partial least square for discrimination Matthew Barker1 and William Rayens2
+Partial least square for discrimination Matthew Barker1 and William Rayens
