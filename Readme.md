@@ -35,10 +35,12 @@ You may also install directly from this repository for the current master:
 pip install git+git://github.com/1feres1/pynmranalysis.git
 ```
 Dependencies : 'numpy' , 'pandas ' ,'scipy' ,'scikit-learn' ,'matplotlib'
-## How to use 
+## Online Demo
 The following python script shows you how to use the main functions of our library
 demo link:
 https://colab.research.google.com/drive/1A5qS1ObiiYBXmPnlecCTxzV41BzQ3fG6?usp=sharing
+## How to use 
+
 ### Preprocessing
 A CSV file containing 1H-NMR spectra for 71 serum samples of patients with coronary heart disease (CHD) and healthy controls is located in CHD.csv in the exemple folder of this repository
 
