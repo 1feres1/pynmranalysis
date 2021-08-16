@@ -2,8 +2,10 @@
 # Pynmranalysis
 ## python library for NMR preprocessing and analysis
 
-<img src="https://github.com/1feres1/pynmranalysis/blob/main/PyNMRanalysis-logos.jpeg" width="300" height="100">
 
+<p align="center">
+    <img src="https://github.com/1feres1/pynmranalysis/blob/main/PyNMRanalysis-logos.jpeg" width="300" height="100">
+</p>
 
 
 [![Build Status](https://travis-ci.com/1feres1/pynmranalysis.svg?branch=main)](https://travis-ci.com/1feres1/pynmranalysis)
