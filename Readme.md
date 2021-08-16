@@ -38,7 +38,7 @@ pip install git+git://github.com/1feres1/pynmranalysis.git
 the following python script shows you how to use the main functions of our library
 demo link:
 https://colab.research.google.com/drive/1A5qS1ObiiYBXmPnlecCTxzV41BzQ3fG6?usp=sharing
-### preprocessing
+### Preprocessing
 A CSV file containing 1H-NMR spectra for 71 serum samples of patients with coronary heart disease (CHD) and healthy controls is located in CHD.csv in the exemple folder of this repository
 
 ```python
@@ -52,7 +52,7 @@ columns = [float(x) for x in spectrum.columns]
 spectrum.columns  = columns
 ```
 
-##### binning / bucketing
+##### Binning / Bucketing
 In order to reduce the data dimensionality binning is commonly used. In binning the spectra are divided into bins (so called buckets) and the total area within each bin is calculated to represent the original spectrum
 
 
@@ -71,7 +71,7 @@ axs[1].set(title = 'spectrum after binning')
 plt.show()
 ```
 
-##### region removal 
+##### Region Removal 
 By default, this step sets to zero spectral areas that are of no interest or have a sigificant and unwanted amount of variation (e.g. the water area).
 
 
@@ -89,8 +89,8 @@ axs[1].set(title = 'spectrum after region removal')
 plt.show()
 
 ```
-### normalization
-##### mean normalization 
+### Normalization
+##### Mean Normalization 
 Each spectrum is divided by its mean so that its mean becomes 1.
 
 
@@ -108,7 +108,7 @@ axs[1].set(title = 'spectrum without normalization')
 plt.show()
 
 ```
-##### median normalization
+##### Median Normalization
 Each spectrum is divided by its median so that its median becomes 1.
 
 ```python
@@ -124,7 +124,7 @@ axs[1].plot(norm_spectrum.iloc[0] )
 axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
-##### quantile normalization
+##### Quantile Normalization
 Each spectrum is divided by its first quartile so that its first quartile becomes 1.
 
 ```python
@@ -140,7 +140,7 @@ axs[1].plot(norm_spectrum.iloc[0] )
 axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
-##### peak normalization
+##### Peak Normalization
 Each spectrum is divided by the value of the peak of the spectrum contained between "peak_range" inclusive (i.e. the maximum value of spectral intensities in that interval).
 
 ```python
@@ -156,7 +156,7 @@ axs[1].plot(norm_spectrum.iloc[0] )
 axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
-##### PQN normalization
+##### PQN Normalization
 Probabilistic Quotient Normalization from Dieterle et al. (2006). If ref.norm is "median" or "mean", will use the median or the mean spectrum as the reference spectrum ; if it is a single number, will use the spectrum located at that row in the spectral matrix; if ref.norm is a numeric vertor of length equal to the number of spectral variables, it defines manually the reference spectrum.
 
 ```python
@@ -200,26 +200,26 @@ pca = PyPCA(n_comps=3)
 #fit the model to data
 pca.fit(spectrum)
 ```
-score plot is the projection of samples in the data set in lower dimention spce of the first 2 componants of the 
+Score plot is the projection of samples in the data set in lower dimention spce of the first 2 componants of the 
 
 ``` python 
 pca.score_plot()
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/score_plot.PNG" >
-scree plot is agraph that show each componant of the pca model with their explained variance
+Scree plot is agraph that show each componant of the pca model with their explained variance
 
 ``` python 
 pca.scree_plot()
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/scree_plot.PNG" >
-outiler plot is a plot that calculate index of outliers in the data and plot them with different color
+Outiler plot is a plot that calculate index of outliers in the data and plot them with different color
 
 ``` python 
 pca.outlier_plot()
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/outlier_plot.PNG" >
-target plot is a scatter plot that shows the projection of each simple in the first 2 componants with 
-colors that much their classses in the target variable
+Target plot is a scatter plot that shows the projection of each simple in the first 2 componants with 
+Colors that much their classses in the target variable
 
 ``` python 
 pca.target_plot(target)
@@ -237,7 +237,7 @@ plsda = PyPLS_DA(ncomps=3)
 #fit the model to data
 plsda.fit(spectrum , target)
 ```
-interia plot is a paired barbot that shows R2Y (goodness of the fit ) score and R2Y (goodnes of predection with cross validation)
+Interia plot is a paired barbot that shows R2Y (goodness of the fit ) score and R2Y (goodnes of predection with cross validation)
 
 ``` python 
 plsda.inertia_barplot(spectrum, target)
