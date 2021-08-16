@@ -32,7 +32,7 @@ You may also install directly from this repository for the current master:
 ```sh
 pip install git+git://github.com/1feres1/pynmranalysis.git
 ```
-## minimum example
+## How to use 
 the following python script shows you how to use the main functions of our library
 demo link:
 https://colab.research.google.com/drive/1A5qS1ObiiYBXmPnlecCTxzV41BzQ3fG6?usp=sharing
