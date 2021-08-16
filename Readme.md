@@ -34,9 +34,11 @@ You may also install directly from this repository for the current master:
 ```sh
 pip install git+git://github.com/1feres1/pynmranalysis.git
 ```
-Dependencies : 'numpy' , 'pandas ' ,'scipy' ,'scikit-learn' ,'matplotlib'
+Dependencies : 'numpy == 1.20.3 ' , 'pandas == 1.2.4 ' ,'scipy == 1.6.3' ,'scikit-learn == 0.24.2' ,'matplotlib == 3.4.2'
 ## Online Demo
 The following python script shows you how to use the main functions of our library
+in this demo we will perform preprocessing steps on 1HNMR dataset then scale this data using NMR specific normalization function 
+and finaly we will perform statistical analysis methodes like PCA and PLS-DA
 demo link:
 https://colab.research.google.com/drive/1A5qS1ObiiYBXmPnlecCTxzV41BzQ3fG6?usp=sharing
 ## How to use 
@@ -274,5 +276,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+"...the **go to** statement should be abolished..." [[1]](#1).
+
+## References
+
+<a id="1">[1]</a> 
+Dijkstra, E. W. (1968). 
+Go to statement considered harmful. 
+Communications of the ACM, 11(3), 147-148.
 
 
