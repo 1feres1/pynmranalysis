@@ -34,6 +34,7 @@ You may also install directly from this repository for the current master:
 ```sh
 pip install git+git://github.com/1feres1/pynmranalysis.git
 ```
+Dependencies : 'numpy' , 'pandas ' ,'scipy' ,'scikit-learn' ,'matplotlib'
 ## How to use 
 The following python script shows you how to use the main functions of our library
 demo link:
