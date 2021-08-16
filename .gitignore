@@ -2,3 +2,4 @@ pynmranalysis.egg-info
 dist
 build/lib/pynmranalysis
 .idea
+pynmranalysis/__pycache__
