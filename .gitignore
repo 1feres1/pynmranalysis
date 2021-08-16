@@ -3,3 +3,4 @@ dist
 build/lib/pynmranalysis
 .idea
 pynmranalysis/__pycache__
+__pycache__
