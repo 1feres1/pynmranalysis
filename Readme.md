@@ -44,6 +44,7 @@ https://colab.research.google.com/drive/1A5qS1ObiiYBXmPnlecCTxzV41BzQ3fG6?usp=sh
 ## How to use 
 
 ### Preprocessing
+
 A CSV file containing 1H-NMR spectra for 71 serum samples of patients with coronary heart disease (CHD) and healthy controls is located in CHD.csv in the exemple folder of this repository
 
 ```python
@@ -94,6 +95,7 @@ axs[1].set(title = 'spectrum after region removal')
 plt.show()
 
 ```
+note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[1]](#1).
 ### Normalization
 ##### Mean Normalization 
 Each spectrum is divided by its mean so that its mean becomes 1.
@@ -177,7 +179,7 @@ axs[1].plot(norm_spectrum.iloc[0] )
 axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
-
+note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[1]](#1).
 ### statistical analysis
 #### PCA 
 A pickle file containing 1H-NMR spectra for 64 serum samples of patients with two groups of disgstive diseases bliary/Pancreatic Disease and Intestinal Diseases is located in digestive_disease_data.pkl in the exemple folder of this repository 
@@ -254,6 +256,7 @@ PLSDA score plot is a scatter plot that shows the projection of simples in the f
 plsda.score_plot(target)
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/plsda_score_plot.PNG" >
+note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[2]](#2).
 
 ### License
 
@@ -277,13 +280,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-"...the **go to** statement should be abolished..." [[1]](#1).
+
 
 ## References
 
 <a id="1">[1]</a> 
-Dijkstra, E. W. (1968). 
-Go to statement considered harmful. 
-Communications of the ACM, 11(3), 147-148.
-
-
+PepsNMR for 1 H NMR metabolomic data pre-processing
+<a id="2">[2]</a> 
+Partial least square for discrimination Matthew Barker1 and William Rayens2
