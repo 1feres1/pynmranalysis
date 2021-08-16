@@ -1,9 +1,4 @@
 from .analysis import PyPLS , PyPLS_DA , PyPCA
-
-__version__ = '0.13.5'
-
-__all__ = ['PyPLS' , 'PyPLS_DA', 'PyPCA']
-
 """
 pynmranalysis provide objects witch wrap pre-existing scikit-learn PCA and PLS algorithms and add PLS-DA models
  with are very useful for dealing with omics dataset in general and NMR data specifically
@@ -15,3 +10,7 @@ Y prediction into class membership). Supports both 1vs1 and Multinomial classifi
 and quality control metrics for Multinomial are still work in progress).
 
 """
+__version__ = '0.13.5'
+
+__all__ = ['PyPLS' , 'PyPLS_DA', 'PyPCA']
+
