@@ -39,8 +39,11 @@ Dependencies : 'numpy == 1.20.3 ' , 'pandas == 1.2.4 ' ,'scipy == 1.6.3' ,'sciki
 The following python script shows you how to use the main functions of our library
 in this demo we will perform preprocessing steps on 1HNMR dataset then scale this data using NMR specific normalization function 
 and finaly we will perform statistical analysis methodes like PCA and PLS-DA
+
 demo link:
+
 https://colab.research.google.com/drive/1A5qS1ObiiYBXmPnlecCTxzV41BzQ3fG6?usp=sharing
+
 ## How to use 
 
 ### Preprocessing
@@ -285,6 +288,7 @@ SOFTWARE.
 ## References
 
 <a id="1">[1]</a> 
-PepsNMR for 1 H NMR metabolomic data pre-processing
+PepsNMR for 1 H NMR metabolomic data pre-processing Manon Martin , Benoît Legat
+
 <a id="2">[2]</a> 
 Partial least square for discrimination Matthew Barker1 and William Rayens2
