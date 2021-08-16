@@ -98,7 +98,7 @@ axs[1].set(title = 'spectrum after region removal')
 plt.show()
 
 ```
-note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[1]](#1).
+Note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[1]](#1).
 ### Normalization
 ##### Mean Normalization 
 Each spectrum is divided by its mean so that its mean becomes 1.
@@ -182,7 +182,7 @@ axs[1].plot(norm_spectrum.iloc[0] )
 axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
-note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[1]](#1).
+Note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[1]](#1).
 ### statistical analysis
 #### PCA 
 A pickle file containing 1H-NMR spectra for 64 serum samples of patients with two groups of disgstive diseases bliary/Pancreatic Disease and Intestinal Diseases is located in digestive_disease_data.pkl in the exemple folder of this repository 
@@ -260,7 +260,7 @@ plsda.score_plot(target)
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/plsda_score_plot.PNG" >
 
-note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[2]](#2).
+Note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[2]](#2).
 
 ### License
 
