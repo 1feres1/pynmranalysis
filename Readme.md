@@ -14,17 +14,17 @@
 [![PyPI version fury.io](https://badge.fury.io/py/ansicolortags.svg)](https://pypi.org/project/pynmranalysis/1.1.1/)
 [![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/1feres1/pynmranalysis/releases/)
 
-Pynmranalysis has the ability to work with 1H NMR spectrum and offers many preprocessing functions that makes analysing the spectrum more effective
-Also it can be used to perform statistical modeling with great plots
-- Preprocessing steps
-- Normalization 
-- Statistical analysis
+**Pynmranalysis** make it possible to work with **1H NMR spectrum**  using **python**.
+It makes analysing the spectrum more effective by offering many **preprocessing functions** and  makes it easy to perform **statistical modeling** with great plots.
+
+With **Pynmranalysis**, you are no longer restricted to use R or matlab to work with **NMR signals** !
+
 
 
 ## Installation
 
 
-Install the pachage with pip command
+Install the pachage with pip command:
 
 
 ```sh
@@ -34,21 +34,26 @@ You may also install directly from this repository for the current master:
 ```sh
 pip install git+git://github.com/1feres1/pynmranalysis.git
 ```
-Dependencies : 'numpy == 1.20.3 ' , 'pandas == 1.2.4 ' ,'scipy == 1.6.3' ,'scikit-learn == 0.24.2' ,'matplotlib == 3.4.2'
-## Online Demo
-The following python script shows you how to use the main functions of our library
-in this demo we will perform preprocessing steps on 1HNMR dataset then scale this data using NMR specific normalization function 
-and finaly we will perform statistical analysis methodes like PCA and PLS-DA
+##### Required dependencies:
+- numpy == 1.20.3 
+- pandas == 1.2.4 
+- scipy == 1.6.3
+- scikit-learn == 0.24.2
+- matplotlib == 3.4.2
 
-demo link:
+## Online Demo
+The following notebook shows you how to use the main functions of our library.
+This includes performing the **preprocessing steps** on 1H NMR dataset, scaling this data using NMR specific **normalization function** and finaly performing statistical analysis methodes like **PCA** and **PLS-DA**.
+
+You can test it yourself via this **link**:
 
 https://colab.research.google.com/drive/1A5qS1ObiiYBXmPnlecCTxzV41BzQ3fG6?usp=sharing
 
 ## How to use 
 
-### Preprocessing
+#### Preprocessing
 
-A CSV file containing 1H-NMR spectra for 71 serum samples of patients with coronary heart disease (CHD) and healthy controls is located in CHD.csv in the exemple folder of this repository
+We will use a CSV file containing 1H-NMR spectra for 71 serum samples of patients with coronary heart disease (CHD) and healthy controls,located in example/CHD.csv in the exemple folder of this repository
 
 ```python
 # import 
@@ -61,8 +66,8 @@ columns = [float(x) for x in spectrum.columns]
 spectrum.columns  = columns
 ```
 
-##### Binning / Bucketing
-In order to reduce the data dimensionality binning is commonly used. In binning the spectra are divided into bins (so called buckets) and the total area within each bin is calculated to represent the original spectrum
+#### Binning / Bucketing
+In order to reduce the data dimensionality binning is commonly used. In binning, the spectra are divided into bins (so called buckets) and the total area within each bin is calculated to represent the original spectrum. Here is an example:
 
 
 ```python
@@ -80,7 +85,7 @@ axs[1].set(title = 'spectrum after binning')
 plt.show()
 ```
 
-##### Region Removal 
+#### Region Removal 
 By default, this step sets to zero spectral areas that are of no interest or have a sigificant and unwanted amount of variation (e.g. the water area).
 
 
@@ -98,8 +103,8 @@ axs[1].set(title = 'spectrum after region removal')
 plt.show()
 
 ```
-Note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[1]](#1).
-### Normalization
+**Note** : The implementation of these functions is similar to R's  PepsNMR library [[1]](#1).
+#### Normalization
 ##### Mean Normalization 
 Each spectrum is divided by its mean so that its mean becomes 1.
 
@@ -167,7 +172,7 @@ axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
 ##### PQN Normalization
-Probabilistic Quotient Normalization from Dieterle et al. (2006). If ref.norm is "median" or "mean", will use the median or the mean spectrum as the reference spectrum ; if it is a single number, will use the spectrum located at that row in the spectral matrix; if ref.norm is a numeric vertor of length equal to the number of spectral variables, it defines manually the reference spectrum.
+We used the definition from Dieterle et al [[3]](#3). If ref.norm is "median" or "mean", we will use the median or the mean spectrum as the reference spectrum ; if it is a single number, will use the spectrum located at that row in the spectral matrix; if ref.norm is a numeric vertor of length equal to the number of spectral variables, it defines manually the reference spectrum.
 
 ```python
 from pynmranalysis.normalization import PQN_normalization
@@ -182,10 +187,14 @@ axs[1].plot(norm_spectrum.iloc[0] )
 axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
-Note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[1]](#1).
-### statistical analysis
-#### PCA 
-A pickle file containing 1H-NMR spectra for 64 serum samples of patients with two groups of disgstive diseases bliary/Pancreatic Disease and Intestinal Diseases is located in digestive_disease_data.pkl in the exemple folder of this repository 
+**Note** : The implementation of these functions is similar to  R's PepsNMR library [[1]](#1).
+#### statistical analysis
+
+##### PyPCA 
+
+Principal component analysis, or **PCA**, is a statistical procedure that allows you to summarize the information content in large data tables by means of a smaller set of “summary indices” that can be more easily visualized and analyzed.
+
+A pickle file containing 1H-NMR spectra for 64 serum samples of patients with two groups of digestive diseases, biliary/Pancreatic Disease and Intestinal Diseases is located in digestive_disease_data.pkl in the exemple folder of this repository. 
 
 ```python
 # import 
@@ -198,11 +207,7 @@ data = pd.read_pickle('digestive_disease_data.pkl')
 spectrum = data.iloc[ : , :-1]
 target = data.iloc[ : , -1].values
 ```
-
-#### PyPCA 
-
-Principal component analysis, or PCA, is a statistical procedure that allows you to summarize the information content in large data tables by means of a smaller set of “summary indices” that can be more easily visualized and analyzed
-
+PyPCA class and it's methods are used to perform PCA.
 ``` python 
 from pynmranalysis.analysis import PyPCA
 #create pypca instance 
@@ -210,26 +215,25 @@ pca = PyPCA(n_comps=3)
 #fit the model to data
 pca.fit(spectrum)
 ```
-Score plot is the projection of samples in the data set in lower dimention spce of the first 2 componants of the 
+The score plot is the projection of samples in the dataset in lower dimension space of the first 2 components of the  ?????????????????????????
 
 ``` python 
 pca.score_plot()
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/score_plot.PNG" >
-Scree plot is agraph that show each componant of the pca model with their explained variance
+The scree plot is a graph that shows each component of the PCA model with their explained variance.
 
 ``` python 
 pca.scree_plot()
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/scree_plot.PNG" >
-Outiler plot is a plot that calculate index of outliers in the data and plot them with different color
+Outiler plot is a plot that calculates the index of the outliers in the data and plot them with a different color.
 
 ``` python 
 pca.outlier_plot()
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/outlier_plot.PNG" >
-Target plot is a scatter plot that shows the projection of each simple in the first 2 componants with 
-Colors that much their classses in the target variable
+The target plot is a scatter plot that shows the projection of each simple in the first 2 components with colors that matchs their classses in the target variable.
 
 ``` python 
 pca.target_plot(target)
@@ -247,47 +251,28 @@ plsda = PyPLS_DA(ncomps=3)
 #fit the model to data
 plsda.fit(spectrum , target)
 ```
-Interia plot is a paired barbot that shows R2Y (goodness of the fit ) score and R2Y (goodnes of predection with cross validation)
+The interia plot is a paired barbot that shows R2Y (goodness of the fit ) score and R2Y (goodnes of predection with cross validation)
 
 ``` python 
 plsda.inertia_barplot(spectrum, target)
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/interia%20plot.PNG" >
-PLSDA score plot is a scatter plot that shows the projection of simples in the first 2 latent variables
+PLSDA score plot is a scatter plot that shows the projection of simples in the first 2 latent variables.
 
 ``` python 
 plsda.score_plot(target)
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/plsda_score_plot.PNG" >
 
-Note : The implementation provided of those functions here is semilar to that of the R PepsNMR library [[2]](#2).
+Note : The implementation of these functions is similar to R's PepsNMR library [[2]](#2).
 
 ### License
 
-Copyright (c) [2021] [Feres Sakouhi]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+MIT
 
 
 
-## References
-
+## Reference
 <a id="1">[1]</a> 
 PepsNMR for 1 H NMR metabolomic data pre-processing Manon Martin , Benoît Legat
 
