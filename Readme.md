@@ -51,7 +51,7 @@ https://colab.research.google.com/drive/1A5qS1ObiiYBXmPnlecCTxzV41BzQ3fG6?usp=sh
 ## How to use 
 
 #### Preprocessing
-
+Preprocessing is a set of operations applyed to raw data in order to prepare it for further analysis
 We will use a CSV file containing 1H-NMR spectra for 71 serum samples of patients with coronary heart disease (CHD) and healthy controls,located in example/CHD.csv in the exemple folder of this repository
 
 ```python
@@ -104,6 +104,9 @@ plt.show()
 ```
 **Note** : The implementation of these functions is similar to R's  PepsNMR library [[1]](#1).
 #### Normalization
+
+The comparison between the spectra is impossible without prior normalization. Therefore, a normalization step allows the data from all the spectra to be directly comparable
+
 ##### Mean Normalization 
 Each spectrum is divided by its mean so that its mean becomes 1.
 
@@ -171,11 +174,11 @@ axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
 ##### PQN Normalization
-We used the definition from Dieterle et al [[3]](#3). If ref.norm is "median" or "mean", we will use the median or the mean spectrum as the reference spectrum ; if it is a single number, will use the spectrum located at that row in the spectral matrix; if ref.norm is a numeric vertor of length equal to the number of spectral variables, it defines manually the reference spectrum.
+We used the definition from Dieterle et al [[2]](#2). If ref_norm is "median" or "mean", we will use the median or the mean spectrum as the reference spectrum ; if it is a single number, will use the spectrum located at that row in the spectral matrix ,it defines manually the reference spectrum.
 
 ```python
 from pynmranalysis.normalization import PQN_normalization
-norm_spectrum = PQN_normalization(r_spectrum , verbose=False)
+norm_spectrum = PQN_normalization(r_spectrum ,ref_norm = "median" , verbose=False)
 ```
 ```python
 fig , axs = plt.subplots(2,1, figsize = (16,5))
@@ -214,7 +217,7 @@ pca = PyPCA(n_comps=3)
 #fit the model to data
 pca.fit(spectrum)
 ```
-The score plot is the projection of samples in the dataset in lower dimension space of the first 2 components of the  ?????????????????????????
+The score plot is the projection of samples in the dataset in lower dimension space of the first 2 components of the model 
 
 ``` python 
 pca.score_plot()
@@ -263,7 +266,7 @@ plsda.score_plot(target)
 ```
 <img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/plsda_score_plot.PNG" >
 
-Note : The implementation of these functions is similar to R's PepsNMR library [[2]](#2).
+Note : The implementation of these functions is similar to R's PepsNMR library [[3]](#3).
 
 ### License
 
@@ -275,5 +278,11 @@ MIT
 <a id="1">[1]</a> 
 PepsNMR for 1 H NMR metabolomic data pre-processing Manon Martin , Benoît Legat
 
-<a id="2">[2]</a> 
+<a id="2">[2]</a>
+Probabilistic Quotient Normalization as Robust Method to Account for Dilution of Complex Biological Mixtures. Application in 1H NMR Metabonomics
+
+<a id="3">[3]</a> 
 Partial least square for discrimination Matthew Barker1 and William Rayens
+
+
+
