@@ -223,25 +223,25 @@ The score plot is the projection of samples in the dataset in lower dimension sp
 ``` python 
 pca.score_plot()
 ```
-<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/score_plot.PNG" >
+<img src="https://github.com/1feres1/pynmranalysis/blob/main/example/score_plot.PNG" >
 The scree plot is a graph that shows each component of the PCA model with their explained variance.
 
 ``` python 
 pca.scree_plot()
 ```
-<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/scree_plot.PNG" >
+<img src="https://github.com/1feres1/pynmranalysis/blob/main/example/scree_plot.PNG" >
 Outiler plot is a plot that calculates the index of the outliers in the data and plot them with a different color.
 
 ``` python 
 pca.outlier_plot()
 ```
-<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/outlier_plot.PNG" >
+<img src="https://github.com/1feres1/pynmranalysis/blob/main/example/outlier_plot.PNG" >
 The target plot is a scatter plot that shows the projection of each simple in the first 2 components with colors that matchs their classses in the target variable.
 
 ``` python 
 pca.target_plot(target)
 ```
-<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/target_plot.PNG" >
+<img src="https://github.com/1feres1/pynmranalysis/blob/main/example/target_plot.PNG" >
 
 #### PyPLS_DA
 
@@ -259,17 +259,17 @@ The interia plot is a paired barbot that shows R2Y (goodness of the fit ) score 
 ``` python 
 plsda.inertia_barplot(spectrum, target)
 ```
-<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/interia%20plot.PNG" >
+<img src="https://github.com/1feres1/pynmranalysis/blob/main/example/interia%20plot.PNG" >
 PLSDA score plot is a scatter plot that shows the projection of simples in the first 2 latent variables.
 
 ``` python 
 plsda.score_plot(target)
 ```
-<img src="https://github.com/1feres1/pynmranalysis/blob/main/exemple/plsda_score_plot.PNG" >
+<img src="https://github.com/1feres1/pynmranalysis/blob/main/example/plsda_score_plot.PNG" >
 
 Note : The implementation of these functions is similar to R's PepsNMR library [[3]](#3).
 
-### License
+## License
 
 MIT
 
