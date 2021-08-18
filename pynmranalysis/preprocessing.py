@@ -1,3 +1,17 @@
+""" Preprocessing methods 
+
+This script allows the user to perform preprocessing methods on NMR spectrum 
+
+This script requires that `pandas` , 'scipy' and 'numpy'   be installed within the Python
+environment you are running this script in.
+
+This file can also be imported as a module and contains the following methods:
+
+    * Binning - divide the spectrum into equal lenghts bins and integrate the peak in each bin 
+    * Region Removal   - remove undesired zones from the spectrum 
+ 
+"""
+
 from scipy import integrate
 import pandas as pd
 import numpy as np
@@ -9,12 +23,18 @@ def binning(spectrum, width=False, mb=500, bin_size=0.04, int_meth="simps", verb
         ppm range
 
         :param: spectrum: dataframe of the spectrun values index are the cases and columns are the ppm values
-        :param width: if width is True we use the bin size as a ppm window for binning
-        :param bin_size: bin size is the ppm range of each bin
-        :param int_meth: if set to simps use the composite Simpson’s rule for integration and trap use the composite trapezoidal rule.
-        :param verbose: display inforamation about binning
+        :type pandas dataframe or numpy array 
+        :param width: if width is True we use the bin size as a ppm window for binning defaults to false
+        :type bool
+        :param bin_size: bin size is the ppm range of each bin defaults to 500
+        :type float
+        :param int_meth: if set to simps use the composite Simpson’s rule for integration and trap use the composite trapezoidal rule defaults to 'simps'
+        :type str
+        :param verbose: display inforamation about binning defaults to false
+        :type bool
 
         :return: binned spectrum with columns the bins range
+        :rtype: pandas dataframe or numpy array 
 
         """
     # Data initialisation and checks ----------------------------------------------
@@ -59,11 +79,17 @@ def region_removal(spectrum, type_of_spec="manual", type_remv="Zero", intervals=
           Removes the non-informative regions by setting the values of the spectra in these intervals to zero.
 
           :param: spectrum: dataframe of the spectrun values index are the cases and columns are the ppm values
-          :param type_of_spec: if not "manual", will automatically remove unwanted regions depending on the nature of spectra.
-          :param type_remv:  If equal to "zero", intensities are set to 0; if type.rr = "NaN", intensities are set to NaN.
-          :param verbose: If "True", will print processing information.
-          :params intervals: List containing the extremities of the intervals to be removed.
+          :type  pandas dataframe or numpy array
+          :param type_of_spec: if not "manual", will automatically remove unwanted regions depending on the nature of spectra defaults to 'manual'
+          :type str
+          :param type_remv:  If equal to "zero", intensities are set to 0; if type.rr = "NaN", intensities are set to NaN. defaults to 'Zero'
+          :type str
+          :param verbose: If "True", will print processing information. defaults to bool
+          :type bool
+          :params intervals: List containing the extremities of the intervals to be removed. defaults to [4.5, 5.1]
+          : type list of length of 2 
           :return: spectrum without the unwanted regions
+          :rtype: pandas dataframe or numpy array
 
     """
     # Data initialisation and checks ----------------------------------------------
@@ -125,5 +151,8 @@ def region_removal(spectrum, type_of_spec="manual", type_remv="Zero", intervals=
         print('replaced with : ', type_remv)
 
     return new_data
+
+
+
 
 
