@@ -191,6 +191,7 @@ axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
 **Note** : The implementation of these functions is similar to  R's PepsNMR library [[1]](#1).
+
 ####✨Statistical Analysis✨
 
 ##### PyPCA 
