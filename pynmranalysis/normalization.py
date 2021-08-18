@@ -1,14 +1,33 @@
+""" Normalization methods
+
+This script allows the user to perform NMR spesific methods 
+
+This script requires that `pandas` and 'numpy'   be installed within the Python
+environment you are running this script in.
+
+This file can also be imported as a module and contains the following methods:
+
+    * Mean normalizastion - Each spectrum is divided by its mean so that its mean becomes 1
+    * Median normalization  - Each spectrum is divided by its mean so that its median becomes 1
+    * Quantile normalization - Each spectrum is divided by its mean so that its first quartile becomes 1
+    * Peak normalization Each spectrum divided by the maximum peak in peak range 
+    * PQN normalization - Perform Probabilistic Quotient Normalization
+"""
+
 import pandas as pd
 import numpy as np
 
-# mean normalizastion
+
 
 def mean_normalization(spectrum, verbose=False):
     """
-            returns normalized spectrum where each spectrum is divided by its mean
+            Each spectrum is divided by its mean so that its mean becomes 1
             :param spectrum: dataframe of the spectrun values index are the cases and columns are the ppm value
-            :param verbose : if set to True return the factor
+            :type pandas dataframe or numpy array 
+            :param verbose : if set to True return the factor defaults to false
+            :type bool
             :return: noemalized spectrum
+            :rtype pandas dataframe or numpy array
             """
     # Data initialisation and checks
     assert type(verbose) == bool , "verbose must be boolean"
@@ -29,10 +48,13 @@ def mean_normalization(spectrum, verbose=False):
 
 def median_normalization(spectrum, verbose=False):
     """
-                returns normalized spectrum where each spectrum is divided by its median
+                Each spectrum is divided by its mean so that its median becomes 1
                 :param spectrum: dataframe of the spectrun values index are the cases and columns are the ppm value
-                :param verbose : if set to True return the factor
+                :type pandas dataframe or numpy array
+                :param verbose : if set to True return the factor defaults to false
+                :type bol
                 :return: normalizaed spectrum
+                :rtype: pandas dataframe or numpy array
                 """
     # Data initialisation and checks
     assert type(verbose) == bool, "verbose must be boolean"
@@ -51,10 +73,13 @@ def median_normalization(spectrum, verbose=False):
 
 def quantile_normalization(spectrum, verbose=False):
     """
-                    returns normalized spectrum where each spectrum is divided by its first quartile
-                    :param spectrum: dataframe of the spectrun values index are the cases and columns are the ppm value
-                    :param verbose : if set to True return the factor
-                    :return: normalizaed spectrum
+                Each spectrum is divided by its mean so that its median becomes 1
+                :param spectrum: dataframe of the spectrun values index are the cases and columns are the ppm value
+                :type pandas dataframe or numpy array
+                :param verbose : if set to True return the factor  defaults to false
+                :type bol
+                :return: normalizaed spectrum
+                :rtype: pandas dataframe or numpy array
                     """
     # Data initialisation and checks
     assert type(verbose) == bool, "verbose must be boolean"
@@ -73,11 +98,17 @@ def quantile_normalization(spectrum, verbose=False):
 
 def peak_normalization(spectrum, peak_range=[3.05, 4.05], verbose=False):
     """
-                        returns normalized spectrum where each spectrum is divided by maximum peak in each spectrum
+                        Each spectrum is divided by its mean so that its median becomes 1
                         :param spectrum: dataframe of the spectrun values index are the cases and columns are the ppm value
-                        :param peak_range: the ppm range containing the specified peak
-                        :param verbose : if set to True return the factor
+                        :type pandas dataframe or numpy array
+                        :param peak_range: the ppm range containing the specified peak defaults to [3.05, 4.05]
+                        :type list of lenght of 2 
+                        :param verbose : if set to True return the factor defaults to false
+                        :type bol
                         :return: normalizaed spectrum
+                        :rtype: pandas dataframe or numpy array
+                        
+                   
                         """
     assert type(verbose) == bool
     assert isinstance(peak_range, list) and len(peak_range) == 2 and isinstance(peak_range[0], float) and isinstance(
@@ -115,12 +146,19 @@ def PQN_normalization(spectrum , ref_norm = "median" , verbose = False) :
                         Perform Probabilistic Quotient Normalization
                         First a total area normalization should be done before PQN
                         is applied
+                        Each spectrum is divided by its mean so that its median becomes 1
                         :param spectrum: dataframe of the spectrun values index are the cases and columns are the ppm value
+                        :type pandas dataframe or numpy array
                         :param ref_norm: If ref.norm is "median" or "mean", will use the median or the mean spectrum as
                          the reference spectrum ; if it is a single number, will use the spectrum located at that row
-                         in the spectral matrix;
-                        :param verbose : if set to True return the factor
+                         in the spectral matrix defaults to 'median'
+                        :type str
+                        :param verbose : if set to True return the factor defaults to false
+                        :type bol
                         :return: normalizaed spectrum
+                        :rtype: pandas dataframe or numpy array
+                        
+                        
                         """
   assert type(verbose) == bool , "verbose must be boolean"
   assert ref_norm in ["median" , "mean"] or ref_norm in np.arange(len(spectrum.index)) , "ref_norm is not available "
@@ -141,3 +179,4 @@ def PQN_normalization(spectrum , ref_norm = "median" , verbose = False) :
   if verbose == True:
       print(factor)
   return new_data
+
