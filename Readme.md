@@ -50,7 +50,7 @@ https://colab.research.google.com/drive/1A5qS1ObiiYBXmPnlecCTxzV41BzQ3fG6?usp=sh
 
 ## How to use 
 
-#### **Preprocessing**
+####  ✨Preprocessing✨
 Preprocessing is a set of operations applyed to raw data in order to prepare it for further analysis
 
 We will use a CSV file containing 1H-NMR spectra for 71 serum samples of patients with coronary heart disease (CHD) and healthy controls,located in example/CHD.csv in the exemple folder of this repository
@@ -104,7 +104,7 @@ plt.show()
 
 ```
 **Note** : The implementation of these functions is similar to R's  PepsNMR library [[1]](#1).
-#### Normalization
+#### ✨Normalization✨
 
 The comparison between the spectra is impossible without prior normalization. Therefore, a normalization step allows the data from all the spectra to be directly comparable
 
@@ -191,7 +191,7 @@ axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
 **Note** : The implementation of these functions is similar to  R's PepsNMR library [[1]](#1).
-* **statistical analysis** *
+####✨Statistical Analysis✨
 
 ##### PyPCA 
 
