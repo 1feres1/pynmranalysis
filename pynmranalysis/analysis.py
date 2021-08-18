@@ -1,38 +1,21 @@
+""" statistical analysis methods
+
+This script allows the user to perform statistical models likde PCA , PLS and PLS-DA to used spesifically on NMR data 
+and get plots that help to undrestande  and validate those model results 
+
+This script requires that `pandas` , 'numpy' , 'scikit-learn' , 'scipy' and 'matplotlib'  be installed within the Python
+environment you are running this script in.
+
+This file can also be imported as a module and contains the following
+classes:
+
+    * PyPCA - semilar to sklearn imlementation of PCA with plots like scree plot and score plot
+    * PyPLS - semilar to sklearn implemtation of PLS and used to implemnt the PLS-DA model
+    * PyPLS_DA - PLS model but for classification , this implemntation include cross validation and permuation tests along with 
+    plots like score plot and interia barplot
 """
-   A class used to perform principal component analysis PCA
 
-   ...
-   self. = pca
-        self. = n_comps
-        self. = scaler
-        self. = None
-        self. = False
-        self.scores = None
-        self.m_params = None
 
-   Attributes
-   ----------
-   pca_algorithm_ : PCA implementation of sklearn
-       a formatted string to print out what the animal says
-   n_comps : int
-       number of PCA components
-   loadings : data matrix
-       the coefficients of the linear combination of the original variables from which the principal components (PCs) are constructed.
-   isfitted : bool
-       indicate if the model is fitted or not
-
-   Methods
-   -------
-   transform(sound=None)
-       Prints the animals name and what sound it makes
-    _residual_ssx(self, x)
-    inverse_transform(self, scores):
-    fit_transform(self, x, **fit_params)
-    def fit(self, x)
-    hotelling_T2(self, comps=None, alpha=0.05)
-    dmodx(self, x)
-    _dmodx_fcrit(self, x, alpha=0.05)
-   """
 
 
 
@@ -61,14 +44,30 @@ from scipy.stats import f
 
 
 class PyPCA(BaseEstimator):
-    """
-         PyPAC object - Wrapper for sklearn.decomposition PCA algorithms for Omics data analysis
-        :param n_comps: Number of components for PCA
-        :param scaler: data scaling object
 
     """
+       PyPAC object - Wrapper for sklearn.decomposition PCA algorithms for Omics data analysis
+
+           
+       :param pca_algorithm: a formatted string to print out what the animal says
+       :type pca_algorithm: PCA implementation of sklearn
+       :param n_comps: number of PCA components (default 2)
+       :type n_comps: int
+       :param loadings: the coefficients of the linear combination of the original variables from which the principal components (PCs) are constructed.
+       :type loadings: data matrix
+       :param isfitted: indicate if the model is fitted or not (default False)
+       :type isfitted: bool
+       :param scores:  the scores of PCA model 
+       :type scores: numpy array 
+       :param m_params: indicate the models results params  (default None)
+       :type m_params: dic
+  
+
+       """
 
     def __init__(self, n_comps=2, scaler=StandardScaler()):
+        """Constructor method
+                """
 
         # Perform the check with is instance but avoid abstract base class runs. PCA needs number of comps anyway!
         pca = PCA(n_components=n_comps)
@@ -85,12 +84,13 @@ class PyPCA(BaseEstimator):
         self.m_params = None
 
     def transform(self, x):
+       
         """
         get the projection of the data metrix x on the pricipal componants of PCA
-        :param x: data metrix to be fit (rows : samples , columns : variables )
-
-        :return: PCA projections (x scores) (rows : samples , columns : principal componants)
-
+        :param x: data metrix to be fit 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+        :return: PCA projections (x scores) 
+        :rtype: numpy.ndarray, shape [n_samples, ncomps]
         :raise ValueError: If there are problems with the input or during model fitting.
         """
         try:
@@ -104,8 +104,11 @@ class PyPCA(BaseEstimator):
 
     def _residual_ssx(self, x):
         """
-        :param x: data metrix to be fit (rows : samples , columns : variables )
+        :param x: data metrix to be fit
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
         :return: RSS resudual sum of squares
+        :rtype: int
+        
         """
         pred_scores = self.transform(x)
 
@@ -118,8 +121,8 @@ class PyPCA(BaseEstimator):
         """
         inverse transformation of x score data to the original data before projection
         :param scores: The projections ( x scores)  (rows : samples , columns : principal componants)
-
         :return: Data matrix in the original format (rows : samples , columns : variables )
+        :rtype: int
 
         """
         # Scaling check for consistency
@@ -130,11 +133,13 @@ class PyPCA(BaseEstimator):
         else:
             return self.pca_algorithm.inverse_transform(scores)
 
-    def fit_transform(self, x, **fit_params):
+    def fit_transform(self, x):
         """
         Fit a model and return the x scores (rows : samples , columns : principal componants)
-        :param x:  data metrix to be fit (rows : samples , columns : variables )
+        :param x:  data metrix to be fit 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
         :return: PCA projections ( x scores) after transforming x
+        :rtype: numpy.ndarray, shape (n_samples, n_comps)
         :raise ValueError: If there are problems with the input or during model fitting.
         """
 
@@ -147,7 +152,8 @@ class PyPCA(BaseEstimator):
     def fit(self, x):
         """
               Perform model fitting on the provided x data matrix and calculate basic goodness-of-fit metrics.
-              :param x: data metrix to be fit (rows : samples , columns : variables )
+              :param x: data metrix to be fit 
+              :type x: numpy.ndarray, shape (rows : samples , columns : variables )
               :raise ValueError: If any problem occurs during fitting.
         """
         try:
@@ -187,9 +193,12 @@ class PyPCA(BaseEstimator):
     def hotelling_T2(self, comps=None, alpha=0.05):
         """
         Obtain the parameters for the Hotelling T2 ellipse at the desired significance level.
-        :param list comps:
-        :param float alpha: Significance level
+        :param list comps defaults to None
+        :type int or None
+        :param float alpha: Significance level defaults to 0.05
+        :type float
         :return: The Hotelling T2 ellipsoid radii at vertex
+        :rtype: float 
         :raise AtributeError: If the model is not fitted
         :raise ValueError: If the components requested are higher than the number of components in the model
         :raise TypeError: If comps is not None or list/numpy 1d array and alpha a float
@@ -228,8 +237,10 @@ class PyPCA(BaseEstimator):
     def dmodx(self, x):
         """
         Normalised DmodX measure
-        :param x: data metrix to be fit (rows : samples , columns : variables )
+        :param x: data metrix to be fit 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
         :return: The Normalised DmodX measure for each sample
+        :rtype float 
         """
         resids_ssx = self._residual_ssx(x)
         s = np.sqrt(resids_ssx / (self.loadings.shape[1] - self.n_comps))
@@ -238,8 +249,11 @@ class PyPCA(BaseEstimator):
 
     def _dmodx_fcrit(self, x, alpha=0.05):
         """
-        :param alpha: significance level
+        Calculate the degree of freedom of the PCA model  
+        :param alpha: significance level defaults to 0.05
+        :type float
         :return dmodx fcrit
+        :rtype float
         """
 
         # Degrees of freedom for the PCA model (denominator in F-stat)
@@ -252,11 +266,16 @@ class PyPCA(BaseEstimator):
     def outlier(self, x, comps=None, measure='T2', alpha=0.05):
         """
          using F statistic and T2 /Dmodx mesure to determine outliers
-        :param x: data metrix to be fit (rows : samples , columns : variables )
-        :param comps: Which components to use (for Hotelling T2 only)
-        :param measure: T2 or DmodX
-        :param alpha: Significance level
+        :param x: data metrix to be fit 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+        :param comps: Which components to use (for Hotelling T2 only) defaults to None
+        :type int or None 
+        :param measure: T2 or DmodX defaults to 'T2'
+        :type str
+        :param alpha: Significance level defaults to 0.05
+        :type float
         :return: List of ouliers indices
+        :rtype: list 
         """
         try:
             if measure == 'T2':
@@ -275,7 +294,8 @@ class PyPCA(BaseEstimator):
 
     def score_plot(self):
         """ plot the projection of the x scores on the firest 2 components
-        :param x : data metrix to be fit (rows : samples , columns : variables )
+        :param x : data metrix to be fit 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
         :return 2 dimentional scatter plot """
 
         try:
@@ -297,7 +317,8 @@ class PyPCA(BaseEstimator):
 
     def scree_plot(self):
         """ plot the explained varianace of each componant in the PCA model
-        :param x : data metrix to be fit (rows : samples , columns : variables )
+        :param x : data metrix to be fit 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
         :return scree plot  """
 
         try:
@@ -318,10 +339,14 @@ class PyPCA(BaseEstimator):
 
     def outlier_plot(self, x, comps=None, measure='T2', alpha=0.05):
         """ detect outlier in x metric based on their variance and plot them with different color
-        :param x : data metrix to be fit (rows : samples , columns : variables )
-        :param comps: Which components to use (for Hotelling T2 only)
-        :param measure: T2 or DmodX
-        :param alpha: Significance level
+        :param x : data metrix to be fit 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+        :param comps: Which components to use (for Hotelling T2 only) defaults to None
+        :type int or None
+        :param measure: T2 or DmodX defaults to 'T2'
+        :type str
+        :param alpha: Significance level defaults to 0.05
+        :type float
 
         :return scree plot  """
 
@@ -350,7 +375,8 @@ class PyPCA(BaseEstimator):
 
     def target_plot(self,  y):
         """ the same as score plot but instead but we add color to each sample based on their classe
-        :param x : data metrix to be fit (rows : samples , columns : variables )
+        :param x : data metrix to be fit 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
         :params y : target variable (list) (each class has unique integer value)
 
         :return scree plot  """
@@ -386,20 +412,55 @@ class PyPCA(BaseEstimator):
 
 class PyPLS(BaseEstimator, RegressorMixin, TransformerMixin):
     """
-    PuPLS object semilar to PLS model in croos decomposition module in sklearn
-    this object will be used for calculation of PLS-DA params (R2X , R2Y)
-    :param int n_comps: number of componants for PLS model
-    :param xscaler: Scaler object for X data matrix it should be an sklearn scaler or None
-    :raise TypeError: If the pca_algorithm or scaler objects are not of the right class.
+       PyPLS object semilar to PLS model in croos decomposition module in sklearn
+       this object will be used for calculation of PLS-DA params (R2X , R2Y)
+       the implemntation of this algorithme is taken from the SIMPLS implementation 
+       (SIMPLS, is proposed which calculates the PLS factors directly as linear combinations of the original variables)
+       you can check the original paper "SIMPLS: An alternative approach to partial least squares regression", DOI : "https://doi.org/10.1016/0169-7439(93)85002-X"
 
-    """
-    """
-    the implemntation of this algorithme is taken from the SIMPLS implementation 
-    (SIMPLS, is proposed which calculates the PLS factors directly as linear combinations of the original variables)
-    you can check the original paper "SIMPLS: An alternative approach to partial least squares regression", DOI : "https://doi.org/10.1016/0169-7439(93)85002-X"
-    """
+       :param scores_t: projection of X (default None  ) 
+       :type scores_t: data matrix
+       :param scores_u: projection of Y  (default None)
+       :type scores_u: data matrix
+       :param isfitted: indicate if the model is fitted or not (default None  ) 
+       :type isfitted: bool
+       :param weights_w: maximum covariance of X with Y (default None  )
+       :type weights_w: data matrix
+       :param loadings_p: loading of model simelar to PCA loading assosiated with T to X(default None  )
+       :type loadings_p : data matrix
+       :param loadings_q: loading of model simelar to PCA loading assosiated with U to Y (default None  )
+       :type loadings_q: data matrix
+       :param rotations_ws: the rotation of X in the latin variable space (default None  )
+       :type rotations_ws: data matrix
+       :param rotations_cs: the rotation of Y in the latin variable space (default None  )
+       :type rotations_cs: data matrix
+       :param b_u: the beta from regration T on U (default None  )
+       :type b_u: data matrix
+       :param b_t: the beta from regration U on T (default None  )
+       :type b_t: data matrix
+       :param ncomps: number of component (laltent variables ) (default 2 )
+       :type ncomps: int
+       :param beta_coeffs: the cofficients of PLS regression model (default None  )
+       :type beta_coeffs: data matrix
+       :param x_scaler:used on independent variables X (default None  )
+       :type x_scaler:sklearn sclaer
+       :param y_scaler: used on target variable Y(default None  )
+       :type y_scaler: sklearn sclaer
+       :param m_params: the parmas of model after fitting 
+       :type m_params:  dict 
+       
+
+           
+           
+    
+
+   
+       """
+
 
     def __init__(self, ncomps=2, xscaler=StandardScaler()):
+        """Constructor method
+                """
 
         try:
 
@@ -435,8 +496,10 @@ class PyPLS(BaseEstimator, RegressorMixin, TransformerMixin):
     def fit(self, x, y):
         """
         fit the model to get all model coff and scores  and get the goodness of the fit R2X and R2Y
-        :param x: data metrix to be fit (rows : samples , columns : variables )
+        :param x: data metrix to be fit 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
         :param y: depentent variable or target variable
+        :type y: list or 1d array 
         :raise ValueError: If any problem occurs during fitting.
         """
         try:
@@ -496,12 +559,16 @@ class PyPLS(BaseEstimator, RegressorMixin, TransformerMixin):
     def score(self, x, y, block_to_score='y', sample_weight=None):
         """
         funtion to calculate R2X and R2Y
-        :param x: data metrix to be fit (rows : samples , columns : variables )
-        :param y: target variable
-        :param str block_to_score: shose if we want to calculate R2X or R2Y
-        :param sample_weight: Optional sample weights to use in scoring.
+        :param x: data metrix to be fit 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+        :param y: target variable 
+        :type y: list or 1d array 
+        :param str block_to_score: shose if we want to calculate R2X or R2Y defaults to 'y'
+        :type str
+        :param sample_weight: Optional sample weights to use in scoring defaults to None
         :return R2Y: by predicting Y from X wr get R2Y
         :return R2X: by predicting X from Y we get R2X
+        :rtype float
         :raise ValueError: If block to score argument is not acceptable or date mismatch issues with the provided data.
         """
         try:
@@ -542,9 +609,12 @@ class PyPLS(BaseEstimator, RegressorMixin, TransformerMixin):
     def predict(self, x=None, y=None):
         """
         predict y from X or X from Y
-        :param x: data metrix to be fit (rows : samples , columns : variables )
-        :param y: target variable
+        :param x: data metrix to be fit  defaults to None
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+        :param y: target variable defaults to None
+        :type y: list or 1d array 
         :return: Predicted data block (X or Y) obtained from the other data block.
+        :rtype: numpy.ndarray, shape [n_samples]
         :raise ValueError: If no data matrix is passed, or dimensions mismatch issues with the provided data.
         :raise AttributeError: Calling the method without fitting the model before.
         """
@@ -593,9 +663,12 @@ class PyPLS(BaseEstimator, RegressorMixin, TransformerMixin):
     def transform(self, x=None, y=None):
         """
         calculate U or T metrix equivalent to sklearn TransformeMixin
-        :param x: data metrix to be fit (rows : samples , columns : variables )
-        :param y: target variable
+        :param x: data metrix to be fit defaults to None
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+        :param y: target variable defaults to None
+        :type y: list or 1d array 
         :return: Latent Variable scores (T) for the X matrix and for the Y vector/matrix (U).
+        :rtype: tuple with 2 numpy.ndarray, shape (n_samples, n_comps)
         :raise ValueError: If dimensions of input data are mismatched.
         :raise AttributeError: When calling the method before the model is fitted.
         """
@@ -637,9 +710,12 @@ class PyPLS(BaseEstimator, RegressorMixin, TransformerMixin):
     def cummulativefit(self, x, y):
         """
         calculate the commitative sum of squares
-        :param x: data metrix to be fit (rows : samples , columns : variables )
+        :param x: data metrix to be fit 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
         :param y: target variable
+        :type y: list or 1d array 
         :return: dictionary object containing the total Regression Sum of Squares and the Sum of Squares
+        :rtype: dict
         per components, for both the X and Y data blocks.
         """
         # reshape y if number of dimention is 1
@@ -682,7 +758,9 @@ class PyPLS(BaseEstimator, RegressorMixin, TransformerMixin):
         """
         get a semilar model with reduced number of componants
         :param int n__comps: number of componants
+        :type int
         :return PyPLS object with reduced number of components.
+        :rtype: PyPLS instance
         :raise ValueError: If number of components desired is larger than original number of components
         :raise AttributeError: If model is not fitted.
         """
@@ -760,8 +838,10 @@ class PyPLS(BaseEstimator, RegressorMixin, TransformerMixin):
     def _residual_ssx(self, x):
         """
         calculate the resudua sum of squres
-        :param x: Data matrix [n samples, m variables]
+        :param x: Data matrix 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
         :return: The residual Sum of Squares per sample
+        :rtype float 
         """
         # transorm x to laten variables
         pred_scores = self.transform(x)
@@ -780,29 +860,67 @@ class PyPLS(BaseEstimator, RegressorMixin, TransformerMixin):
 ############################################################
 
 class PyPLS_DA(PyPLS, ClassifierMixin):
-    """
-    PyPLS_DA object -Function to perform standard Partial Least Squares regression to classify samples.
-
-    :param int ncomps: Number of components for PLS-DA model
-    :param xscaler: Scaler object for X data matrix.
-    :raise TypeError: If the pca_algorithm or scaler objects are not of the right class.
-    """
+ 
 
     """
-    plsda function fit PLS models with 1,...,ncomp components to the factor or class vector Y. The appropriate indicator matrix is created.
+        PyPLS_DA object -Function to perform standard Partial Least Squares regression to classify samples.
+        plsda function fit PLS models with 1,...,ncomp components to the factor or class vector Y. The appropriate indicator matrix is created.
 
-    standar scaler or any other scaling technqiue is applyed  as internal pre-processing step
-    See:
-    - Indhal et. al., From dummy regression to prior probabilities in PLS-DA, Journal of Chemometrics, 2007
-    - Barker, Matthew, Rayens, William, Partial least squares for discrimination, Journal of Chemometrics, 2003
-    - Brereton, Richard G. Lloyd, Gavin R., Partial least squares discriminant analysis: Taking the magic away, 
-    Journal of Chemometrics, 2014
+        standar scaler or any other scaling technqiue is applyed  as internal pre-processing step
+        See:
+        - Indhal et. al., From dummy regression to prior probabilities in PLS-DA, Journal of Chemometrics, 2007
+        - Barker, Matthew, Rayens, William, Partial least squares for discrimination, Journal of Chemometrics, 2003
+        - Brereton, Richard G. Lloyd, Gavin R., Partial least squares discriminant analysis: Taking the magic away, 
+        Journal of Chemometrics, 2014
+    
+        Model performance metrics employed are the Q2Y , Area under the curve and ROC curves, f1 measure, balanced accuracy,
+        precision, recall, confusion matrices and 0-1 loss.
 
-    Model performance metrics employed are the Q2Y , Area under the curve and ROC curves, f1 measure, balanced accuracy,
-    precision, recall, confusion matrices and 0-1 loss.
-    """
+        
+
+           :param scores_t: projection of X (default None  ) 
+           :type scores_t: data matrix
+           :param scores_u: projection of Y  (default None)
+           :type scores_u: data matrix
+           :param isfitted: indicate if the model is fitted or not (default None  ) 
+           :type isfitted: bool
+           :param weights_w: maximum covariance of X with Y (default None  )
+           :type weights_w: data matrix
+           :param loadings_p: loading of model simelar to PCA loading assosiated with T to X(default None  )
+           :type loadings_p : data matrix
+           :param loadings_q: loading of model simelar to PCA loading assosiated with U to Y (default None  )
+           :type loadings_q: data matrix
+           :param rotations_ws: the rotation of X in the latin variable space (default None  )
+           :type rotations_ws: data matrix
+           :param rotations_cs: the rotation of Y in the latin variable space (default None  )
+           :type rotations_cs: data matrix
+           :param b_u: the beta from regration T on U (default None  )
+           :type b_u: data matrix
+           :param b_t: the beta from regration U on T (default None  )
+           :type b_t: data matrix
+           :param ncomps: number of component (laltent variables ) (default 2 )
+           :type ncomps: int
+           :param beta_coeffs: the cofficients of PLS regression model (default None  )
+           :type beta_coeffs: data matrix
+           :param x_scaler:used on independent variables X (default None  )
+           :type x_scaler:sklearn sclaer
+           :param y_scaler: used on target variable Y(default None  )
+           :type y_scaler: sklearn sclaer
+           :param m_params: the parmas of model after fitting 
+           :type m_params:  dict 
+           :param cvParameters: the parmas of model after after cross validation like Q2 
+           :type cvParameters:  dict 
+           :param n_classes: the parmas of model after fitting 
+           :type n_classes: int
+           :param m_params: number of classes in target variable 
+           :type m_params:  dict 
+       
+               
+           """
 
     def __init__(self, ncomps=2, xscaler=StandardScaler()):
+        """Constructor method
+        """
         pls_algorithm = PLSRegression(ncomps, scale=False)
         try:
 
@@ -839,11 +957,11 @@ class PyPLS_DA(PyPLS, ClassifierMixin):
     def fit(self, x, y, ):
         """
         Fit model to data (x and y)
-        :param x:array-like of shape (n_samples, n_features)
-            Training vectors, where `n_samples` is the number of samples and
-            `n_features` is the number of predictors.
-        :param y: array-like of shape (n_samples,)
-            Target vectors, where `n_samples` is the number of samples
+        :param x:array-like of shape 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+         
+        :param y: atrget variable
+        :type y: list or 1d array 
 
         :raise ValueError: If any problem occurs during fitting.
         """
@@ -985,12 +1103,12 @@ class PyPLS_DA(PyPLS, ClassifierMixin):
         Predict and calculate the R2 for the model using one of the data blocks (X or Y) provided.
         Equivalent to the scikit-learn ClassifierMixin score method.
         :param x: Data matrix to fit the PLS model.
-        :type x: numpy.ndarray, shape [n_samples, n_features] or None
-        :param y: Data matrix to fit the PLS model.
-        :type y: numpy.ndarray, shape [n_samples, n_features] or None
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+        :param y: target variable
+        :type y: list or 1d array 
         :param str block_to_score: Which of the data blocks (X or Y) to calculate the R2 goodness of fit.
         :param sample_weight: Optional sample weights to use in scoring.
-        :type sample_weight: numpy.ndarray, shape [n_samples] or None
+        :type sample_weight: numpy.ndarray, shape [n_samples] or None defaults to None
         :return R2Y: The model's R2Y, calculated by predicting Y from X and scoring.
         :rtype: float
         :return R2X: The model's R2X, calculated by predicting X from Y and scoring.
@@ -1006,9 +1124,13 @@ class PyPLS_DA(PyPLS, ClassifierMixin):
     def predict(self, x):
         """
         predict the value of the target variable based on predictive variable x
-        :param x: data metrix to be fit (rows : samples , columns : variables )
-        :param y: depentent variable or target variable
+        :param x: data metrix to be fit
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+        :param y: target variable
+        :type y: list or 1d array 
         :return: Predicted data block Y by as discret values using argmin
+        :rtype: numpy.ndarray, shape (n_samples, n_features)
+        
         :raise ValueError: If no data matrix is passed, or dimensions mismatch issues with the provided data.
         :raise AttributeError: Calling the method without fitting the model before.
         """
@@ -1038,10 +1160,13 @@ class PyPLS_DA(PyPLS, ClassifierMixin):
     def inverse_transform(self, t=None, u=None):
         """
         transform T and U scores to get X and Y
-        :param t: T scores corresponding to the X data matrix.
-        :param u: Y scores corresponding to the Y data vector/matrix.
+        :param t: T scores corresponding to the X data matrix. defaults to None
+        :type numpy array 
+        :param u: Y scores corresponding to the Y data vector/matrix defaults to None
+        :type numpy array
         :return x: data metrix to be fit (rows : samples , columns : variables )
         :return y: depentent variable or target variable
+        :rtype: numpy.ndarray, shape (n_samples, n_features) or None
         :raise ValueError: If dimensions of input data are mismatched.
         """
         try:
@@ -1075,9 +1200,12 @@ class PyPLS_DA(PyPLS, ClassifierMixin):
     def transform(self, x=None, y=None):
         """
         calculate U or T metrix equivalent to sklearn TransformeMixin
-        :param x: data metrix to be fit (rows : samples , columns : variables )
-        :param y: depentent variable or target variable
+        :param x: data metrix to be fit
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+        :param y: target variable
+        :type y: list or 1d array 
         :return: Latent Variable scores (T) for the X matrix and for the Y vector/matrix (U).
+        :rtype: tuple with 2 numpy.ndarray, shape (n_samples, n_comps)
         :raise ValueError: If dimensions of input data are mismatched.
         :raise AttributeError: When calling the method before the model is fitted.
         """
@@ -1132,11 +1260,14 @@ class PyPLS_DA(PyPLS, ClassifierMixin):
                          ):
         """
         cross validation result of the model and calculate Q2
-        :param x: data metrix to be fit (rows : samples , columns : variables )
-        :param y: depentent variable or target variable
+        :param x: data metrix to be fit 
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+        :param y: target varibale
+        :type y: list or 1d array 
         :param cv_method:  cross valiation method
-        :param bool outputdist: Output the whole distribution for. Useful when ShuffleSplit or CrossValidators other than KFold.
+        :param bool outputdist: Output the whole distribution for. Useful when ShuffleSplit or CrossValidators other than KFold defaults to false
         :return: dict of cross validation scores
+        :rtype dict
         :raise TypeError: If the cv_method passed is not a scikit-learn CrossValidator object.
         :raise ValueError: If the x and y data matrices are invalid.
         """
@@ -1509,8 +1640,9 @@ class PyPLS_DA(PyPLS, ClassifierMixin):
         """
         calculate the variable importance parameters to get the most important variable used by the model
         :param mode: The type of model parameter to use in calculating the VIP. Default value is weights (w), and other acceptable arguments are p, ws, cs, c and q.
+        defaults to 'w'
         :type mode: str
-        :param str direction: The data block to be used to calculated the model fit and regression sum of squares.
+        :param str direction: The data block to be used to calculated the model fit and regression sum of squares defaults to 'y'
         :return numpy.ndarray VIP: The vector with the calculated VIP values.
         :rtype: numpy.ndarray, shape [n_features]
         :raise ValueError: If mode or direction is not a valid option.
@@ -1557,8 +1689,10 @@ class PyPLS_DA(PyPLS, ClassifierMixin):
     def inertia_barplot(self, x, y):
         """
         interia plot to get the goodness of the fit R2 and the goodness of prediction Q2 with each number of componant
-        :param x: data metrix to be fit (rows : samples , columns : variables )
-        :param y: depentent variable or target variable
+        :param x: data metrix to be fit
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+        :param y: target variable 
+        :type y: list or 1d array 
         """
         Q2_scores = []
         R2_scores = []
@@ -1582,8 +1716,10 @@ class PyPLS_DA(PyPLS, ClassifierMixin):
     def score_plot(self, y):
         """
         PLS_DA sore plot gives the projection of the simples on the first 2 componants (latent variables )
-        :param x: data metrix to be fit (rows : samples , columns : variables )
-        :param y: depentent variable or target variable
+        :param x: data metrix to be fit
+        :type x: numpy.ndarray, shape (rows : samples , columns : variables )
+        :param y: target variable
+        :type y: list or 1d array 
         """
         try:
             if self.isfitted == False:
@@ -1609,6 +1745,7 @@ class PyPLS_DA(PyPLS, ClassifierMixin):
             raise atter
         except TypeError as typer:
             raise typer
+
 
 
 
