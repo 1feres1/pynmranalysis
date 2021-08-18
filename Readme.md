@@ -50,7 +50,7 @@ https://colab.research.google.com/drive/1A5qS1ObiiYBXmPnlecCTxzV41BzQ3fG6?usp=sh
 
 ## How to use 
 
-####  ✨Preprocessing✨
+### ✨Preprocessing✨
 Preprocessing is a set of operations applyed to raw data in order to prepare it for further analysis
 
 We will use a CSV file containing 1H-NMR spectra for 71 serum samples of patients with coronary heart disease (CHD) and healthy controls,located in example/CHD.csv in the exemple folder of this repository
@@ -104,11 +104,11 @@ plt.show()
 
 ```
 **Note** : The implementation of these functions is similar to R's  PepsNMR library [[1]](#1).
-#### ✨Normalization✨
+### ✨Normalization✨
 
 The comparison between the spectra is impossible without prior normalization. Therefore, a normalization step allows the data from all the spectra to be directly comparable
 
-##### Mean Normalization 
+#### Mean Normalization 
 Each spectrum is divided by its mean so that its mean becomes 1.
 
 
@@ -126,7 +126,7 @@ axs[1].set(title = 'spectrum without normalization')
 plt.show()
 
 ```
-##### Median Normalization
+#### Median Normalization
 Each spectrum is divided by its median so that its median becomes 1.
 
 ```python
@@ -142,7 +142,7 @@ axs[1].plot(norm_spectrum.iloc[0] )
 axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
-##### Quantile Normalization
+#### Quantile Normalization
 Each spectrum is divided by its first quartile so that its first quartile becomes 1.
 
 ```python
@@ -158,7 +158,7 @@ axs[1].plot(norm_spectrum.iloc[0] )
 axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
-##### Peak Normalization
+#### Peak Normalization
 Each spectrum is divided by the value of the peak of the spectrum contained between "peak_range" inclusive (i.e. the maximum value of spectral intensities in that interval).
 
 ```python
@@ -174,7 +174,7 @@ axs[1].plot(norm_spectrum.iloc[0] )
 axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
-##### PQN Normalization
+#### PQN Normalization
 We used the definition from Dieterle et al [[2]](#2). If ref_norm is "median" or "mean", we will use the median or the mean spectrum as the reference spectrum ; if it is a single number, will use the spectrum located at that row in the spectral matrix ,it defines manually the reference spectrum.
 
 ```python
@@ -192,9 +192,9 @@ plt.show()
 ```
 **Note** : The implementation of these functions is similar to  R's PepsNMR library [[1]](#1).
 
-####✨Statistical Analysis✨
+###  ✨Statistical Analysis✨
 
-##### PyPCA 
+#### PyPCA 
 
 Principal component analysis, or **PCA**, is a statistical procedure that allows you to summarize the information content in large data tables by means of a smaller set of “summary indices” that can be more easily visualized and analyzed.
 
