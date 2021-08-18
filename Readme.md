@@ -80,7 +80,7 @@ fig , axs = plt.subplots(2,1 , figsize = (16,5))
 fig.tight_layout()
 axs[0].plot(spectrum.iloc[0] )
 axs[0].set(title = 'spectrum before binning')
-axs[1].plot(binned_data.iloc[0] )
+axs[1].plot(binned_data.iloc[0])
 axs[1].set(title = 'spectrum after binning')
 plt.show()
 ```
@@ -191,7 +191,7 @@ axs[1].set(title = 'spectrum without normalization')
 plt.show()
 ```
 **Note** : The implementation of these functions is similar to  R's PepsNMR library [[1]](#1).
-#### statistical analysis
+* **statistical analysis** *
 
 ##### PyPCA 
 
