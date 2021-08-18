@@ -1,3 +1,41 @@
+"""
+   A class used to perform principal component analysis PCA
+
+   ...
+   self. = pca
+        self. = n_comps
+        self. = scaler
+        self. = None
+        self. = False
+        self.scores = None
+        self.m_params = None
+
+   Attributes
+   ----------
+   pca_algorithm_ : PCA implementation of sklearn
+       a formatted string to print out what the animal says
+   n_comps : int
+       number of PCA components
+   loadings : data matrix
+       the coefficients of the linear combination of the original variables from which the principal components (PCs) are constructed.
+   isfitted : bool
+       indicate if the model is fitted or not
+
+   Methods
+   -------
+   transform(sound=None)
+       Prints the animals name and what sound it makes
+    _residual_ssx(self, x)
+    inverse_transform(self, scores):
+    fit_transform(self, x, **fit_params)
+    def fit(self, x)
+    hotelling_T2(self, comps=None, alpha=0.05)
+    dmodx(self, x)
+    _dmodx_fcrit(self, x, alpha=0.05)
+   """
+
+
+
 # import
 import numpy as np
 
