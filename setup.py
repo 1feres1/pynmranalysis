@@ -9,7 +9,7 @@ with open('E:\my work\py_nmr_analysis\Readme.md', "r", encoding="utf-8") as fh:
 setup(
     name='pynmranalysis',
     packages=find_packages(include=['pynmranalysis']) ,
-    version='0.0.2',
+    version='1.1.3',
     description='python library for NMR preprocessing and analysis',
     long_description = long_description ,
     long_description_content_type='text/markdown',
@@ -29,7 +29,7 @@ setup(
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: Microsoft :: Windows',
         'Operating System :: POSIX :: Linux'] ,
-    install_requires=['numpy' , 'pandas ' ,"scipy" ,"scikit-learn" ,"matplotlib"
+    install_requires=['numpy ' , 'pandas==1.2.4' ,"scipy" ,"scikit-learn" ,"matplotlib"
                       ],
 
     setup_requires=['pytest-runner'],
